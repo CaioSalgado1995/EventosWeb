@@ -40,10 +40,6 @@
 				<input type="text" class="form-control" id="password" name="password">
 				<form:errors cssClass="text-danger" path="password"></form:errors>
 			</div>
-			<div class="form-group">
-				<label for="expertise">Área de atuação:</label>
-				<input type="text" class="form-control" id="expertise" name="expertise">
-			</div>
 			
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form:form>

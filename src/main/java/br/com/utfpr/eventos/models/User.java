@@ -1,18 +1,30 @@
 package br.com.utfpr.eventos.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User {
-	
-	private String name;
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private String email;
+	private String name;
 	private String document;
 	private String password;
-	private String expertise;
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	private List<Role> roles = new ArrayList<Role>();
 	
 	public String getName() {
 		return name;
@@ -32,17 +44,36 @@ public class User {
 	public void setDocument(String document) {
 		this.document = document;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getExpertise() {
-		return expertise;
+	public List<Role> getRoles() {
+		return roles;
 	}
-	public void setExpertise(String expertise) {
-		this.expertise = expertise;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.roles;
+	}
+	public String getUsername() {
+		return this.email;
+	}
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	public boolean isEnabled() {
+		return true;
 	}
 	
 }

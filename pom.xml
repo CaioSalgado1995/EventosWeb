@@ -66,6 +66,7 @@
 			<version>5.1.0.Final</version>
 		</dependency>
 
+		<!-- Spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -97,10 +98,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-
+	
 	<build>
 		<finalName>eventos</finalName>
-
 	</build>
 </project>

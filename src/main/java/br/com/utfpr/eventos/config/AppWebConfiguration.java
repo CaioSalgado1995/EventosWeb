@@ -10,11 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.utfpr.eventos.controller.HomeController;
-import br.com.utfpr.eventos.controller.RegisterController;
 import br.com.utfpr.eventos.dao.UserDAO;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, RegisterController.class, UserDAO.class})
+@ComponentScan(basePackageClasses={HomeController.class, UserDAO.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
