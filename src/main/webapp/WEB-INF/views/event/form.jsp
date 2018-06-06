@@ -16,8 +16,45 @@
 <title>Cadastrar Evento - Form</title>
 </head>
 <body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+		<a	class="navbar-brand" href="#">Eventos Curitiba</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="${s:mvcUrl('HC#index').build()}">
+						Home
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('EC#getAll').build()}">Listagem</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Carrinho</a>
+				</li>
+				<!-- 
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Dropdown link </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="#">Action</a> 
+						<a	class="dropdown-item" href="#">Another action</a> 
+						<a	class="dropdown-item" href="#">Something else here</a>
+					</div>
+				</li>
+				-->
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
-		<form:form action="${s:mvcUrl('EC#create').build()}" method="post" commandName="event">
+		<h1>Cadastro de Eventos</h1>
+		<form:form action="${s:mvcUrl('EC#insert').build()}" method="post" commandName="event">
 			<div class="form-group">
 				<label for="name">Nome:</label>
 				<input type="text" class="form-control" id="name" name="name">
