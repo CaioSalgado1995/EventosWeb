@@ -18,6 +18,13 @@ public class EventDAO {
 	private EntityManager manager;
 	
 	public List<Event> getAll(){
-		return manager.createQuery("select e from Event e", Event.class).getResultList();
+		return manager.createQuery("select e from Event e", Event.class)
+				.getResultList();
+	}
+	
+	public Event getById(int id) {
+		return manager.createQuery("select e from Event e where id = :id", Event.class)
+				.setParameter("id", id)
+				.getSingleResult();
 	}
 }

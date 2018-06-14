@@ -1,6 +1,7 @@
 package br.com.utfpr.eventos.models;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -78,8 +79,8 @@ public class Event {
 		this.adress = adress;
 	}
 
-	public Calendar getDate() {
-		return date;
+	public String getDate() {
+		return new SimpleDateFormat("dd/MM/yyyy").format(date.getTime());
 	}
 
 	public void setDate(Calendar date) {

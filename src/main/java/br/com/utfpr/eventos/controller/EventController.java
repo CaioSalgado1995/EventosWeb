@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ public class EventController {
 
 	@Autowired
 	private EventDAO eventDAO;
+	
 	
 	@RequestMapping("/create")
 	public String form(){
@@ -37,6 +39,15 @@ public class EventController {
 		if(events.size() == 0) {
 			modelAndView.addObject("emptySet", true);
 		}
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("detail/{id}")
+	public ModelAndView detail(@PathVariable int id){
+		ModelAndView modelAndView = new ModelAndView("event/detail");
+		Event event = eventDAO.getById(id);
+		modelAndView.addObject("event", event);
 		
 		return modelAndView;
 	}

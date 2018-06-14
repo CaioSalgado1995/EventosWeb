@@ -34,27 +34,36 @@
 		</div>
 	</nav>
 	<div class="container">
-		<h1>Lista de Eventos</h1>
-		<c:if test="${emptySet}">
-			<h2>Lista vazia!</h2>
-		</c:if>
-		<c:if test="${!emptySet}">
-			<div class="row">
-				<c:forEach items="${events}" var="event">
-					<div class="col-6 col-md-4">
-						<div class="card">
-							<div class="card-header">${event.name}</div>
-							<div class="card-body">
-								<h5 class="card-title">${event.date}</h5>
-								<p class="card-text">${event.description}</p>
-								<a href="${s:mvcUrl('EC#detail').arg(0, event.id).build()}" class="btn btn-primary">Saiba mais</a>
-								<input type="hidden" value="${event.id}"/>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		</c:if>
+		<div class="row">
+			<h2>${event.name}</h2>
+		</div>
+		<div class="row">
+			<ul class="list-group">
+				<li class="list-group-item">
+ 						${event.description}
+ 					</li>
+ 					<li class="list-group-item">
+ 						${event.adress}
+ 					</li>
+ 					<li class="list-group-item d-flex justify-content-between align-items-center">
+					Número de vagas:
+   					<span class="badge badge-primary badge-pill">${event.max}</span>
+ 					</li>
+ 					<li class="list-group-item d-flex justify-content-between align-items-center">
+					Número de vagas restantes:
+   					<span class="badge badge-primary badge-pill">${event.max}</span>
+ 					</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Preço:
+   					<span class="badge badge-primary badge-pill">${event.price}</span>
+ 					</li>
+				<li class="list-group-item">
+					<a class="btn btn-primary" href="#">Comprar Ingresso</a>
+					<a class="btn btn-primary" href="#">Favoritar</a>
+				</li>
+			</ul>
+			
+		</div>
 	</div>
 </body>
 </html>
