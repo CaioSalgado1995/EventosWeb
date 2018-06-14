@@ -20,8 +20,8 @@
 	<div class="container">
 		<form:form action="${s:mvcUrl('LC#login').build() }" method="post" commandName="user">
 			<div class="form-group">
-				<label for="email">Email:</label>
-				<input type="text" class="form-control" id="email" name="email">
+				<label for="username">Email:</label>
+				<input type="text" class="form-control" id=username name="username">
 			</div>
 			<div class="form-group">
 				<label for="password">Senha:</label>
