@@ -3,6 +3,8 @@ package br.com.utfpr.eventos.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,6 +25,9 @@ public class RegisterController {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private MailSender sender;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new UserValidation());
@@ -42,6 +47,20 @@ public class RegisterController {
 		}
 		
 		userDAO.insert(user);
+		enviaEmailCadastro(user);
 		return new ModelAndView("redirect:login");
+	}
+	
+	private void enviaEmailCadastro(User user){
+		SimpleMailMessage email = new SimpleMailMessage();
+		
+		email.setSubject("Cadastro de usuário");
+		email.setTo(user.getEmail());
+		email.setText("Bem vindo " + user.getName() + "! Seu cadastro foi realizado com sucesso");
+		email.setFrom("caiosalgado1995teste@gmail.com");
+		
+		sender.send(email);
+		
+	
 	}
 }
