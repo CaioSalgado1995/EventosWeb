@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		User user = userDao.findByEmail(email);
 		
 		if(user == null) {
-			throw new UsernameNotFoundException("Usuário não cadastrado, favor se cadastrsar");
+			throw new UsernameNotFoundException("Usuário não cadastrado, favor cadastrar-se");
 		}
 		
 		return user;

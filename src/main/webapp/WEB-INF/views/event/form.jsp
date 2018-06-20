@@ -37,18 +37,6 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">Carrinho</a>
 				</li>
-				<!-- 
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Dropdown link </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Action</a> 
-						<a	class="dropdown-item" href="#">Another action</a> 
-						<a	class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</li>
-				-->
 			</ul>
 		</div>
 	</nav>
@@ -66,9 +54,9 @@
 				<form:errors cssClass="text-danger" path="description"></form:errors>
 			</div>
 			<div class="form-group">
-				<label for="capacity">Valor:</label>
-				<input type="number" class="form-control" id="capacity" name="capacity">
-				<form:errors cssClass="text-danger" path="capacity"></form:errors>
+				<label for="price">Valor:</label>
+				<input type="number" class="form-control" id="price" name="price">
+				<form:errors cssClass="text-danger" path="price"></form:errors>
 			</div>
 			<div class="form-group">
 				<label for="date">Data do evento:</label>
@@ -76,9 +64,9 @@
 				<form:errors cssClass="text-danger" path="date"></form:errors>
 			</div>
 			<div class="form-group">
-				<label for="value">Valor:</label>
-				<input type="text" class="form-control" id="value" name="value">
-				<form:errors cssClass="text-danger" path="value"></form:errors>
+				<label for="max">Número de vagas:</label>
+				<input type="number" class="form-control" id="max" name="max">
+				<form:errors cssClass="text-danger" path="max"></form:errors>
 			</div>
 			<div class="form-group">
 				<label for="adress">Endereço:</label>

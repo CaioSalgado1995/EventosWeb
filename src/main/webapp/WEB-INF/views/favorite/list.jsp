@@ -13,7 +13,7 @@
 <link type="text/css" href="<c:url value='/resources/css/bootstrap-reboot.min.css'/>" rel="stylesheet">
 <link type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" rel="stylesheet">
 <link type="text/css" href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
-<title>Listagem de Eventos</title>
+<title>Listagem de Favoritos</title>
 </head>
 <body>
 
@@ -34,38 +34,27 @@
 		</div>
 	</nav>
 	<div class="container">
-		<div class="row">
-			<h2>${event.name}</h2>
-		</div>
-		<div class="row">
-			<ul class="list-group">
-				<li class="list-group-item">
- 						${event.description}
- 					</li>
- 					<li class="list-group-item">
- 						${event.adress}
- 					</li>
- 					<li class="list-group-item d-flex justify-content-between align-items-center">
-					Número de vagas:
-   					<span class="badge badge-primary badge-pill">${event.max}</span>
- 					</li>
- 					<li class="list-group-item d-flex justify-content-between align-items-center">
-					Número de vagas restantes:
-   					<span class="badge badge-primary badge-pill">${event.max}</span>
- 					</li>
-				<li class="list-group-item d-flex justify-content-between align-items-center">
-					Preço:
-   					<span class="badge badge-primary badge-pill">${event.price}</span>
- 					</li>
-				<li class="list-group-item">
-					<a class="btn btn-primary" href="#">Comprar Ingresso</a>
-					<c:if test="${!isFavorite}">
-						<a class="btn btn-primary" href="${s:mvcUrl('FC#insert').arg(0, event.id).build()}">Favoritar</a>
-					</c:if>
-				</li>
-			</ul>
-			
-		</div>
+		<h1>Lista de Favoritos</h1>
+		<c:if test="${emptySet}">
+			<h2>Você não tem favoritos salvos!</h2>
+		</c:if>
+		<c:if test="${!emptySet}">
+			<div class="row">
+				<c:forEach items="${events}" var="event">
+					<div class="col-6 col-md-4" style="margin-bottom: 10px;">
+						<div class="card">
+							<div class="card-header">${event.name}</div>
+							<div class="card-body">
+								<h5 class="card-title">${event.date}</h5>
+								<p class="card-text">${event.description}</p>
+								<a href="${s:mvcUrl('EC#detail').arg(0, event.id).build()}" class="btn btn-primary">Saiba mais</a>
+								<input type="hidden" value="${event.id}"/>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>

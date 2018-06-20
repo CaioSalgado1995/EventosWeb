@@ -1,8 +1,9 @@
 package br.com.utfpr.eventos.models;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Event {
 	private String description;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Calendar date;
+	private String date;
 	
 	private BigDecimal price;
 	
@@ -80,10 +81,18 @@ public class Event {
 	}
 
 	public String getDate() {
-		return new SimpleDateFormat("dd/MM/yyyy").format(date.getTime());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date;
+		try {
+			date = format.parse(this.date);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			return dateFormat.format(date);
+		} catch (ParseException e) {
+			return this.date;
+		}
 	}
 
-	public void setDate(Calendar date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 }

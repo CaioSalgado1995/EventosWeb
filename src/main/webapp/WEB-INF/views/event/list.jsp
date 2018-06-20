@@ -25,7 +25,10 @@
 					<a class="nav-link" href="${s:mvcUrl('EC#getAll').build()}">Listagem</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Carrinho</a>
+					<a class="nav-link" href="${s:mvcUrl('FC#getAll').build()}">Favoritos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('PC#getAll').build()}">Histórico de compras</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Logout</a>
@@ -41,7 +44,7 @@
 		<c:if test="${!emptySet}">
 			<div class="row">
 				<c:forEach items="${events}" var="event">
-					<div class="col-6 col-md-4">
+					<div class="col-6 col-md-4" style="margin-bottom: 10px;">
 						<div class="card">
 							<div class="card-header">${event.name}</div>
 							<div class="card-body">
