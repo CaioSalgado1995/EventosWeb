@@ -8,17 +8,20 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
 import br.com.utfpr.eventos.controller.HomeController;
 import br.com.utfpr.eventos.dao.UserDAO;
 import br.com.utfpr.eventos.service.CustomUserDetailsService;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, UserDAO.class, CustomUserDetailsService.class})
+@ComponentScan(basePackageClasses={
+		HomeController.class, 
+		UserDAO.class,
+		CustomUserDetailsService.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -62,5 +65,10 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		mailSender.setJavaMailProperties(mailProperties);
 		
 		return mailSender;
+	}
+	
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
 	}
 }

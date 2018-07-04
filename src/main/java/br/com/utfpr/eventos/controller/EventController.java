@@ -18,8 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.utfpr.eventos.dao.EventDAO;
 import br.com.utfpr.eventos.dao.FavoriteDAO;
 import br.com.utfpr.eventos.models.Event;
-import br.com.utfpr.eventos.models.Favorite;
+import br.com.utfpr.eventos.models.Search;
 import br.com.utfpr.eventos.validation.EventValidation;
+import br.com.utfpr.eventos.validation.SearchValidation;
 
 @Controller
 @RequestMapping("/events")

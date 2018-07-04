@@ -34,11 +34,20 @@ public class FavoriteController {
 		favorite.setIdEvent(id);
 		favorite.setUserEmail(principal.getName());
 		
-		
-		
 		favoriteDAO.insert(favorite);
 	
 		return getAll(principal);
+	}
+	
+	@RequestMapping("/remove/{id}")
+	public ModelAndView remove(@PathVariable int id, Principal principal){
+		ModelAndView modelAndView = new ModelAndView("favorite/remove");
+		
+		favoriteDAO.delete(id, principal.getName());
+		
+		modelAndView.addObject("message", "Favorito excluído com sucesso");
+		
+		return modelAndView;
 	}
 
 
@@ -55,7 +64,7 @@ public class FavoriteController {
 		}
 		
 		for (Favorite favorite : favorites) {
-			Event event = eventDAO.getById(favorite.getId());
+			Event event = eventDAO.getById(favorite.getIdEvent());
 			events.add(event);
 		}
 		

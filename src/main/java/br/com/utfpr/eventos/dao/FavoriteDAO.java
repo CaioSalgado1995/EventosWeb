@@ -21,11 +21,11 @@ public class FavoriteDAO {
 		manager.persist(favorite);
 	}
 	
-	public int delete(Favorite favorite){
+	public int delete(int id, String email){
 		return manager
-		.createQuery("delete f from Favorite f where f.userEmail = :email AND f.idEvent = :event", Favorite.class)
-		.setParameter("email", favorite.getUserEmail())
-		.setParameter("event", favorite.getIdEvent())
+		.createQuery("delete from Favorite f where f.userEmail = :email AND f.idEvent = :idEvent")
+		.setParameter("email", email)
+		.setParameter("idEvent", id)
 		.executeUpdate();
 	}
 

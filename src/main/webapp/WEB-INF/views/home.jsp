@@ -25,7 +25,7 @@
 					<a class="nav-link" href="${s:mvcUrl('EC#getAll').build()}">Listagem</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Carrinho</a>
+					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Logout</a>

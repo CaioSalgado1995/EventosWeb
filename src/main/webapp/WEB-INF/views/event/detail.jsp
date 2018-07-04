@@ -25,7 +25,13 @@
 					<a class="nav-link" href="${s:mvcUrl('EC#getAll').build()}">Listagem</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Carrinho</a>
+					<a class="nav-link" href="${s:mvcUrl('FC#getAll').build()}">Favoritos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('CC#history').build()}">Histórico</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Logout</a>
@@ -58,7 +64,7 @@
    					<span class="badge badge-primary badge-pill">${event.price}</span>
  					</li>
 				<li class="list-group-item">
-					<a class="btn btn-primary" href="#">Comprar Ingresso</a>
+					<a class="btn btn-primary" href="${s:mvcUrl('CC#insert').arg(0, event.id).build()}">Adicionar ao carrinho</a>
 					<c:if test="${!isFavorite}">
 						<a class="btn btn-primary" href="${s:mvcUrl('FC#insert').arg(0, event.id).build()}">Favoritar</a>
 					</c:if>

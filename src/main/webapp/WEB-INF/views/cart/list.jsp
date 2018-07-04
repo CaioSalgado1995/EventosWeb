@@ -13,7 +13,7 @@
 <link type="text/css" href="<c:url value='/resources/css/bootstrap-reboot.min.css'/>" rel="stylesheet">
 <link type="text/css" href="<c:url value='/resources/css/bootstrap.css'/>" rel="stylesheet">
 <link type="text/css" href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
-<title>Listagem de Favoritos</title>
+<title>Carrinho de compras</title>
 </head>
 <body>
 
@@ -25,6 +25,12 @@
 					<a class="nav-link" href="${s:mvcUrl('EC#getAll').build()}">Listagem</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('FC#getAll').build()}">Favoritos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="${s:mvcUrl('CC#history').build()}">Histórico</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
 				</li>
 				<li class="nav-item">
@@ -34,27 +40,53 @@
 		</div>
 	</nav>
 	<div class="container">
-		<h1>Lista de Favoritos</h1>
+		<h1>Carrinho</h1>
 		<c:if test="${emptySet}">
-			<h2>Você não tem favoritos salvos!</h2>
+			<h2>Lista vazia!</h2>
 		</c:if>
 		<c:if test="${!emptySet}">
 			<div class="row">
-				<c:forEach items="${events}" var="event">
-					<div class="col-6 col-md-4" style="margin-bottom: 10px;">
-						<div class="card">
-							<div class="card-header">${event.name}</div>
-							<div class="card-body">
-								<h5 class="card-title">${event.date}</h5>
-								<p class="card-text">${event.description}</p>
-								<a href="${s:mvcUrl('EC#detail').arg(0, event.id).build()}" class="btn btn-primary">Saiba mais</a>
-								<a href="${s:mvcUrl('FC#remove').arg(0, event.id).build()}" class="btn btn-primary">Remover Favorito</a>
-								<input type="hidden" value="${event.id}"/>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Local</th>
+							<th scope="col">Valor</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${myCartEvents}" var="eventCart">
+							<tr>
+								<th scope="row">${eventCart.id}</th>
+								<th>${eventCart.name}</th>
+								<th>${eventCart.adress}</th>
+								<th>${eventCart.price}</th>
+								<th><a class="btn btn-primary" href="${s:mvcUrl('CC#removeItemFromCart').arg(0, eventCart.id).build()}">Remover</a></th>
+							</tr>
+						</c:forEach>
+							<tr>
+								<th scope="row">Total</th>
+								<th></th>
+								<th></th>
+								<th>${total}</th>
+								<th></th>
+							<tr>
+					</tbody>
+				</table>
 			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<a class="btn btn-primary" href="${s:mvcUrl('EC#getAll').build()}">Voltar</a>
+				</div>
+				<div class="col-md-4">
+					<form:form action="${s:mvcUrl('CC#finish').build()}" method="post">
+						<input type="submit" class="btn btn-primary" name="checkout" value="Finalizar compra"/>
+					</form:form>
+				</div>
+			</div>
+			
 		</c:if>
 	</div>
 </body>

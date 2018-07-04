@@ -28,10 +28,13 @@
 					<a class="nav-link" href="${s:mvcUrl('FC#getAll').build()}">Favoritos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${s:mvcUrl('PC#getAll').build()}">Histórico de compras</a>
+					<a class="nav-link" href="${s:mvcUrl('CC#history').build()}">Histórico</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Logout</a>
+					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/eventos/logout">Logout</a>
 				</li>
 			</ul>
 		</div>
@@ -43,6 +46,15 @@
 		</c:if>
 		<c:if test="${!emptySet}">
 			<div class="row">
+				<form:form action="${s:mvcUrl('SC#search').build()}" method="post" commandName="search">
+					<div class="form-group">
+						<input class="form-control" type="text" id="search" name="search">
+						<form:errors cssClass="text-danger" path="search"></form:errors>
+					</div>
+					<input type="submit" class="btn btn-primary" value="Pesquisar" style="margin-bottom: 10px;"></a>
+				</form:form>
+			</div>
+			<div class="row" id="events">
 				<c:forEach items="${events}" var="event">
 					<div class="col-6 col-md-4" style="margin-bottom: 10px;">
 						<div class="card">

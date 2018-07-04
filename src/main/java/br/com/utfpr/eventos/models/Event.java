@@ -31,7 +31,7 @@ public class Event {
 	private int max;
 	
 	private String adress;
-
+	
 	public int getId() {
 		return id;
 	}
