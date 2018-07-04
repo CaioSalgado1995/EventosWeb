@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,6 +34,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
 				</li>
+				<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li class="nav-item">
+						<a class="nav-link" href="${s:mvcUrl('EC#form').build()}">Cadastrar</a>
+					</li>
+				</security:authorize>
 				<li class="nav-item">
 					<a class="nav-link" href="/eventos/logout">Logout</a>
 				</li>
@@ -62,6 +68,9 @@
 							<div class="card-body">
 								<h5 class="card-title">${event.date}</h5>
 								<p class="card-text">${event.description}</p>
+								<security:authorize access="hasRole('ROLE_ADMIN')">
+									<a class="btn btn-primary" href="${s:mvcUrl('EC#remove').arg(0, event.id).build()}">Remover</a>
+								</security:authorize>
 								<a href="${s:mvcUrl('EC#detail').arg(0, event.id).build()}" class="btn btn-primary">Saiba mais</a>
 								<input type="hidden" value="${event.id}"/>
 							</div>

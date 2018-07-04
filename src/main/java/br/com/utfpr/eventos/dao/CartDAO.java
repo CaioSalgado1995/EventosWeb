@@ -60,5 +60,13 @@ public class CartDAO {
 				.setParameter("status", status)
 				.getResultList();
 	}
+
+	public List<Cart> getById(int id) {
+		
+		return manager
+				.createQuery("select c from Cart c where c.idEvent = :id", Cart.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
 	
 }

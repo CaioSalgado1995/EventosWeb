@@ -42,7 +42,7 @@
 	</nav>
 	<div class="container">
 		<h1>Cadastro de Eventos</h1>
-		<form:form action="${s:mvcUrl('EC#insert').build()}" method="post" commandName="event">
+		<form:form action="${s:mvcUrl('EC#insert').build()}" method="post" commandName="event" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="name">Nome:</label>
 				<input type="text" class="form-control" id="name" name="name">
@@ -71,6 +71,10 @@
 			<div class="form-group">
 				<label for="adress">Endereço:</label>
 				<input type="text" class="form-control" id="adress" name="adress">
+			</div>
+			<div class="form-group">
+				<label for="image">Imagem:</label>
+				<input type="file" class="form-control" id="image" name="image">
 			</div>
 			
 			<button type="submit" class="btn btn-primary">Cadastrar</button>

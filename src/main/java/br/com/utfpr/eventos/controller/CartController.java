@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import br.com.utfpr.eventos.dao.CartDAO;
 import br.com.utfpr.eventos.dao.EventDAO;
 import br.com.utfpr.eventos.models.Cart;
 import br.com.utfpr.eventos.models.Event;
+import br.com.utfpr.eventos.models.User;
 
 @Controller
 @RequestMapping("/cart")
@@ -28,6 +31,9 @@ public class CartController {
 	
 	@Autowired
 	private EventDAO eventDAO;
+	
+	@Autowired
+	private MailSender sender;
 	
 	@RequestMapping("/insert/{id}")
 	public ModelAndView insert(@PathVariable int id, Principal principal){
@@ -99,15 +105,28 @@ public class CartController {
 	@RequestMapping(value="finish", method=RequestMethod.POST)
 	public ModelAndView finish(Principal principal){
 		ModelAndView modelAndView = new ModelAndView("cart/finish");
+		double total = 0;
 		
 		List<Cart> myCart = cartDAO.getAllFromUser(principal.getName());
 			
+		List<Event> myCartEvent = eventDAO.getEventsOnCart(myCart);
+		
+		for (Cart cart : myCart) {
+			Event event = eventDAO.getById(cart.getIdEvent());
+			myCartEvent.add(event);
+		}
+		
+		for (Event event : myCartEvent) {
+			total += event.getPrice().doubleValue();
+		}
+		
 		for(Cart cart : myCart) {
 			cartDAO.updateStatus(cart.getId());
 		}
 		
 		modelAndView.addObject("message", "Transação efetuada com sucesso");
 		
+		enviaConfirmacao(principal.getName(), total);
 		
 		return modelAndView;
 	}
@@ -131,5 +150,18 @@ public class CartController {
 		modelAndView.addObject("eventsPayed", myPayedEvent);
 		
 		return modelAndView;
+	}
+	
+	private void enviaConfirmacao(String userEmail, double value){
+		SimpleMailMessage email = new SimpleMailMessage();
+		
+		email.setSubject("Comprovante de compra realizado com sucesso!");
+		email.setTo(userEmail);
+		email.setText("Sua compra foi realizada com sucesso " + userEmail + "! Com valor total de " + value);
+		email.setFrom("caiosalgado1995teste@gmail.com");
+		
+		sender.send(email);
+		
+	
 	}
 }

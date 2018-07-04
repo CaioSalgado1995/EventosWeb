@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,11 +29,16 @@
 					<a class="nav-link" href="${s:mvcUrl('FC#getAll').build()}">Favoritos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${s:mvcUrl('PC#getAll').build()}">Histórico</a>
+					<a class="nav-link" href="${s:mvcUrl('CC#history').build()}">Histórico</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="${s:mvcUrl('CC#getAll').build()}">Carrinho</a>
 				</li>
+				<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li class="nav-item">
+						<a class="nav-link" href="${s:mvcUrl('EC#form').build()}">Cadastrar</a>
+					</li>
+				</security:authorize>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Logout</a>
 				</li>

@@ -53,4 +53,12 @@ public class EventDAO {
 				.setParameter("name", "%" + name + "%")
 				.getResultList();
 	}
+
+	public void delete(int id) {
+		manager
+				.createQuery("delete from Event e where e.id = :id")
+				.setParameter("id", id)
+				.executeUpdate();
+		
+	}
 }

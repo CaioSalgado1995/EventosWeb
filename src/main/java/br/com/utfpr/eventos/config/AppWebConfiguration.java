@@ -9,19 +9,23 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.utfpr.eventos.controller.HomeController;
 import br.com.utfpr.eventos.dao.UserDAO;
+import br.com.utfpr.eventos.infra.FileSaver;
 import br.com.utfpr.eventos.service.CustomUserDetailsService;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses={
 		HomeController.class, 
 		UserDAO.class,
-		CustomUserDetailsService.class})
+		CustomUserDetailsService.class,
+		FileSaver.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -59,12 +63,20 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		mailSender.setPort(587);
 		
 		Properties mailProperties = new Properties();
+		mailProperties.put("mail.transport.protocol", "smtp");
 		mailProperties.put("mail.smtp.auth", true);
 		mailProperties.put("mail.smtp.starttls.enable", true);
+		mailProperties.put("mail.smtp.debug", true);
+		mailProperties.put("mail.transport.connectiontimeout", 10000);
 		
 		mailSender.setJavaMailProperties(mailProperties);
 		
 		return mailSender;
+	}
+	
+	@Bean 
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 	
 	@Bean

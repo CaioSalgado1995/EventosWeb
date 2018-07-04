@@ -32,6 +32,8 @@ public class Event {
 	
 	private String adress;
 	
+	private String imagem;
+	
 	public int getId() {
 		return id;
 	}
@@ -78,6 +80,14 @@ public class Event {
 
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public String getDate() {

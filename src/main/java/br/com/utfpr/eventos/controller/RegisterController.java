@@ -47,7 +47,7 @@ public class RegisterController {
 		}
 		
 		userDAO.insert(user);
-		enviaEmailCadastro(user);
+//		enviaEmailCadastro(user);
 		return new ModelAndView("redirect:login");
 	}
 	
